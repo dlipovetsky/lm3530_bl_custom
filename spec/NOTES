@@ -1,3 +1,49 @@
+Location of device:
+
+    shell@android:/sys/bus/i2c/drivers/lm3530 $ ls -al
+    lrwxrwxrwx root     root              2013-03-20 14:27 0-0038 -> ../../../../devices/i2c-0/0-0038
+    --w------- root     root         4096 2013-03-20 14:27 bind
+    --w------- root     root         4096 2013-03-20 14:27 uevent
+    --w------- root     root         4096 2013-03-20 14:27 unbind
+
+    shell@android:/sys/class/leds/lcd-backlight $ ls -al
+    -rw-r--r-- system   system       4096 2013-03-17 16:28 brightness
+    lrwxrwxrwx root     root              2013-03-17 15:47 device -> ../../../msm_fb.525825
+    -rw-r--r-- root     root         4096 2013-03-17 15:47 max_brightness
+    drwxr-xr-x root     root              2013-03-17 14:53 power
+    lrwxrwxrwx root     root              2013-03-17 15:47 subsystem -> ../../../../../class/leds
+    -rw-r--r-- root     root         4096 2013-03-17 15:47 trigger
+    -rw-r--r-- root     root         4096 2013-03-17 14:53 uevent
+
+    shell@android:/sys/devices/platform/msm_fb.525825 $ ls -al
+    lrwxrwxrwx root     root              2013-03-20 14:29 driver -> ../../../bus/platform/drivers/msm_fb
+    drwxr-xr-x root     root              2013-03-17 14:53 leds
+    -r--r--r-- root     root         4096 2013-03-20 14:29 modalias
+    drwxr-xr-x root     root              2013-03-17 14:53 power
+    lrwxrwxrwx root     root              2013-03-20 14:29 subsystem -> ../../../bus/platform
+    -rw-r--r-- root     root         4096 2013-03-17 14:53 uevent
+
+
+
+Possible Caveat:
+
+    BRT is the percentage of Full Scale Current as set in the Brightness
+    Control Register.
+ 
+    000 = 5 mA full-scale current
+    001 = 8.5 mA full-scale current
+    010 = 12 mA full-scale current
+    011 = 15.5 mA full-scale current
+    100 = 19 mA full-scale current
+    101 = 22.5 mA full-scale current
+    110 = 26 mA full-scale current
+    111 = 29.5 mA full-scale current
+
+If minimum brightness is 1 percent of the existing setting of 29.5 mA
+full-scale current, then reducing this to 5 mA would reduce the minimum
+brightness to about 1 percent of 5 mA, or about 0.2 percent of the
+existing 29.5 mA full scale current.
+
 Idea:
 
 Expose max_current as a value that can by the user just as brightness can be set.
